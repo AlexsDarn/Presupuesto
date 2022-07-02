@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
-const presupuestoController = require("../controllers/presupuestoController");
+const budgetController = require("../controllers/budgetController");
 
 /* GET home page. */
-router.get('/', presupuestoController.index);
+router.get('/', budgetController.index);
 
 module.exports = router;
