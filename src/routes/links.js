@@ -13,7 +13,12 @@ router.post('/add', async (_req, _res) => {
         concept, amount, date, type, category
     };
     await pool.query('INSERT INTO balance set ?', [newLink]);
-    _res.send('received');
+    _res.redirect('/links');
+});
+
+router.get('/', async(_req, _res) => {
+    const balance = await pool.query('SELECT *FROM balance');
+    _res.render('balance/list', { balance });
 });
 
 module.exports = router;
