@@ -7,6 +7,7 @@ const session = require('express-session');
 const MySQLStore = require('express-mysql-session');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
+const bodyParser = require('body-parser');
 
 const { database } = require('./keys');
 
@@ -35,13 +36,14 @@ app.use(session({
 }));
 app.use(flash());
 app.use(morgan('dev'));
-app.use(express.urlencoded({extended: false}));
-app.use(express.json());
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
 app.use(passport.initialize());
 app.use(passport.session());
 
 //global variables
 app.use((_req, _res, next) => {
+    app.locals.message = _req.flash('message');
     app.locals.success = _req.flash('success');
     next();
 });
