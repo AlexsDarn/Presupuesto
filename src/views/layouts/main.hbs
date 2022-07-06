@@ -13,8 +13,39 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous"/>
     {{!--Styles--}}
     <link rel="stylesheet" href="/css/styles.css">
+
+    <script type="text/javascript">
+    var subcategory = {
+        Ingreso: ["Trabajo", "Pensión", "Regalo", "Ventas", "Negocios", "Independiente", "Acciones"],
+        Egreso: ["Arriendo", "Servicios", "Comida", "Higiene personal", "Aseo", "Mascotas", "Familia", "Amigos", "Ahorro", "Compras online", "Juegos", "Vehículo", "Impuestos", "Seguro", "Vestuario"]
+    }
+
+    function makeSubmenu(value) {
+        if (value.length == 0) document.getElementById("categorySelect").innerHTML = "<option></option>";
+        else {
+            var category = "";
+            for (categoryId in subcategory[value]) {
+                category += "<option>" + subcategory[value][categoryId] + "</option>";
+            }
+            document.getElementById("categorySelect").innerHTML = category;
+        }
+    }
+
+/* Show the type and category in console
+    function displaySelected() {
+        var country = document.getElementById("category").value;
+        var city = document.getElementById("categorySelect").value;
+        alert(country + "\n" + city);
+    }*/
+
+    function resetSelection() {
+        document.getElementById("category").selectedIndex = 0;
+        document.getElementById("categorySelect").selectedIndex = 0;
+    }
+</script>
 </head>
-<body>
+<body onload="resetSelection()">
+    {{> navigation}}
     {{{body}}}
 </body>
 </html>
