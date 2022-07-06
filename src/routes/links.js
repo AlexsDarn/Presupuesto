@@ -13,6 +13,7 @@ router.post('/add', async (_req, _res) => {
         concept, amount, date, type, category
     };
     await pool.query('INSERT INTO balance set ?', [newLink]);
+    _req.flash('success', 'Presupuesto agregado correctamente');
     _res.redirect('/links');
 });
 
@@ -24,6 +25,7 @@ router.get('/', async(_req, _res) => {
 router.get('/delete/:id', async (_req, _res) => {
     const { id } = _req.params;
     await pool.query('DELETE FROM balance WHERE id_balance = ?', [id]);
+    _req.flash('success', 'Presupuesto eliminado correctamente');
     _res.redirect('/links');
 });
 
@@ -39,8 +41,8 @@ router.post('/edit/:id', async (_req, _res) => {
     const newLink = {
         concept, amount, date, type, category
     };
-    console.log(newLink);
     await pool.query('UPDATE balance set ? WHERE id_balance = ?', [newLink, id]);
+    _req.flash('success', 'Presupuesto editado correctamente');
     _res.redirect('/links');
 })
 
