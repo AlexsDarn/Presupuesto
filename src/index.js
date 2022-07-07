@@ -5,11 +5,15 @@ const path = require('path');
 const flash = require('connect-flash');
 const session = require('express-session');
 const MySQLStore = require('express-mysql-session');
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
+const bodyParser = require('body-parser');
 
 const { database } = require('./keys');
 
 //initializations
 const app = express();
+require('./lib/passport');
 
 //settings
 app.set('port', process.env.PORT || 4000);
@@ -30,14 +34,18 @@ app.use(session({
     saveUninitialized: false,
     store: new MySQLStore(database)
 }));
-app.use(morgan('dev'));
-app.use(express.urlencoded({extended: false}));
-app.use(express.json());
 app.use(flash());
+app.use(morgan('dev'));
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
+app.use(passport.initialize());
+app.use(passport.session());
 
 //global variables
 app.use((_req, _res, next) => {
+    app.locals.message = _req.flash('message');
     app.locals.success = _req.flash('success');
+    app.locals.user = _req.user;
     next();
 });
 
