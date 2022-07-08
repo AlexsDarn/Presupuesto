@@ -4,6 +4,7 @@ const router = express.Router();
 const pool = require('../database');
 const { isLoggedIn } = require('../lib/auth')
 
+//Add
 router.get('/add', isLoggedIn, (_req, _res) => {
     _res.render('balance/add');
 });
@@ -24,6 +25,7 @@ router.get('/', isLoggedIn, async(_req, _res) => {
     _res.render('balance/list', { balance });
 });
 
+//Delete
 router.get('/delete/:id', isLoggedIn, async (_req, _res) => {
     const { id } = _req.params;
     await pool.query('DELETE FROM balance WHERE id_balance = ?', [id]);
@@ -31,6 +33,7 @@ router.get('/delete/:id', isLoggedIn, async (_req, _res) => {
     _res.redirect('/links');
 });
 
+//Edit
 router.get('/edit/:id', isLoggedIn, async (_req, _res) => {
     const { id } = _req.params;
     const balance = await pool.query('SELECT * FROM balance WHERE id_balance = ?', [id]);

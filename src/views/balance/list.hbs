@@ -1,18 +1,33 @@
 <div class="container p-4">
     <div class="row">
         {{#each balance}}
-        <div class="col-md-3">
-            <div class="card text-center">
-                <div class="card-body">
-                    <h3 class="card-title text-uppercase">
-                        {{concept}}
-                    </h3>
-                    <p class="m-2">${{amount}}</p>
-                    <p class="m-2">{{date}}</p>
-                    <p class="m-2">{{type}}</p>
-                    <p class="m-2">{{category}}</p>
-                    <a href="/links/delete/{{id_balance}}" class="btn btn-danger">Borrar</a>
-                    <a href="/links/edit/{{id_balance}}" class="btn btn-secondary">Editar</a>
+        <div class="container-fluid">
+            <div class="row shadow-lg p-3 mb-5">
+                <div class="col">
+                    <table id="tableP" class="table">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>Descripción</th>
+                                <th>Tipo</th>
+                                <th>Monto</th>
+                                <th>Categoría</th>
+                                <th>Fecha</th>
+                                <th> </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{concept}}</td>
+                                <td>{{type}}</td>
+                                <td>{{amount}}</td>
+                                <td>{{category}}</td>
+                                <td>{{date}}</td>
+                                <td> <a href="/links/delete/{{id_balance}}" class="btn btn-danger">Borrar</a>
+                                    <a href="/links/edit/{{id_balance}}" class="btn btn-secondary">Editar</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
