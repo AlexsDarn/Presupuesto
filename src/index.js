@@ -7,7 +7,6 @@ const session = require('express-session');
 const MySQLStore = require('express-mysql-session');
 const passport = require('passport');
 const bodyParser = require('body-parser');
-const dayjs = require('dayjs');
 
 const { database } = require('./keys');
 
@@ -40,7 +39,6 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use(passport.initialize());
 app.use(passport.session());
-dayjs().format();
 
 //global variables
 app.use((_req, _res, next) => {

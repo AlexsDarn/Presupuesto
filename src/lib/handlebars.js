@@ -1,8 +1,11 @@
-const {format} = require('timeago.js');
+const dayjs = require('dayjs');
+
+dayjs().format();
 
 const helpers = {};
-helpers.timeago = (timestamp) => {
-    return format(timestamp);
+
+helpers.dayjs = (date) => {
+    return dayjs(date).format('DD/MM/YYYY');
 };
 
 module.exports = helpers;
